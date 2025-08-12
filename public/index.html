@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Custom Tokenizer | Gen AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 min-h-screen flex flex-col items-center justify-center p-6"
+  >
+    <h1 class="text-4xl font-extrabold mb-8 text-purple-700 drop-shadow-md">
+      Custom Tokenizer
+    </h1>
+
+    <textarea
+      id="inputText"
+      placeholder="Enter text or encoded value"
+      class="w-full max-w-xl h-36 p-4 rounded-lg shadow-md border-2 border-purple-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-400 focus:outline-none transition duration-300 resize-none text-gray-800 font-medium"
+    ></textarea>
+
+    <div class="mt-6 space-x-4">
+      <button
+        id="encodeBtn"
+        class="px-6 py-3 bg-purple-600 text-white font-semibold rounded-lg shadow hover:bg-purple-700 focus:outline-none focus:ring-4 focus:ring-purple-300 transition duration-300"
+      >
+        Encode
+      </button>
+      <button
+        id="decodeBtn"
+        class="px-6 py-3 bg-pink-600 text-white font-semibold rounded-lg shadow hover:bg-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-300 transition duration-300"
+      >
+        Decode
+      </button>
+    </div>
+
+    <h3 class="mt-10 text-2xl font-semibold text-gray-700">Tokens</h3>
+    <pre
+      id="output"
+      class="w-full max-w-xl mt-4 p-4 bg-white rounded-lg shadow-md border border-gray-300 text-gray-900 whitespace-pre-wrap break-words"
+    ></pre>
+
+    <script>
+      async function sendRequest(endpoint) {
+        const text = document.getElementById("inputText").value;
+        console.log(text);
+
+        const res = await fetch(`/${endpoint}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text }),
+        });
+
+        const data = await res.json();
+        document.getElementById("output").textContent =
+          data.encoded || data.decoded || data.error;
+      }
+
+      document
+        .getElementById("encodeBtn")
+        .addEventListener("click", () => sendRequest("encode"));
+      document
+        .getElementById("decodeBtn")
+        .addEventListener("click", () => sendRequest("decode"));
+    </script>
+  </body>
+</html>
