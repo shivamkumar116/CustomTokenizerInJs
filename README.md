@@ -46,6 +46,14 @@ Server runs at http://localhost:3000
 - Enter text to encode (get numbers) or a comma-separated list of numbers to decode (get text).
 - Click "Encode" or "Decode" to see results.
 
+### Demo
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/3446215c-f916-43ea-8ff6-0ab39ed12c7b" />
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/5af38065-38c8-4364-94e3-a46540020578" />
+
+
+
+
 ## Project Structure
 
 - [`src/tokenizer.js`](src/tokenizer.js): Splits text into tokens
